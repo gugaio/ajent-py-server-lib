@@ -9,7 +9,7 @@ class OpenAIClient(LLMClient):
         self._client = OpenAI(api_key=token)
         self._response_serializer = ResponseSerializer()
 
-    def send(self, messages: List[Dict], tools: List[Dict], model: str = "gpt-4o-mini") -> Any:
+    def send(self, messages: List[Dict], tools: List[Dict], model: str) -> Any:
         response = self._client.chat.completions.create(
             model=model,
             messages=messages,
