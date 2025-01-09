@@ -3,7 +3,7 @@ from typing import Any, Dict, List
 
 class LLMClient(ABC):    
     @abstractmethod
-    def send(self, messages: List[Dict], tools: List[Dict], model: str = "gpt-4o-mini") -> Any:
+    def send(self, messages: List[Dict], tools: List[Dict], model: str) -> Any:
         pass
 
     @abstractmethod
