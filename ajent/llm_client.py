@@ -7,5 +7,9 @@ class LLMClient(ABC):
         pass
 
     @abstractmethod
+    def stream(self, messages: List[Dict], tools: List[Dict], model: str) -> Any:
+        pass
+
+    @abstractmethod
     def serialize_response(self, response: Any) -> Dict:
         pass
