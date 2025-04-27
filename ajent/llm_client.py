@@ -13,3 +13,7 @@ class LLMClient(ABC):
     @abstractmethod
     def serialize_response(self, response: Any) -> Dict:
         pass
+
+    @abstractmethod
+    def stt(self, audio_file_path) -> Any:
+        pass

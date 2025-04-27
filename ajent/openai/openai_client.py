@@ -141,3 +141,35 @@ class OpenAIClient(LLMClient):
         except Exception as e:
             logging.exception("Unexpected error occurred")
             yield {"error": "Unexpected error", "details": str(e)}
+
+    def stt(self, audio_file_path):
+        """
+        Transcribe audio file to text using OpenAI's Whisper model
+        
+        Args:
+            audio_file_path (str): Path to the audio file
+            api_token (str): OpenAI API token
+            
+        Returns:
+            str: Transcribed text
+        """
+        try:
+            with open(audio_file_path, "rb") as file:
+                transcription = self._client.audio.transcriptions.create(
+                    model="whisper-1",
+                    file=file,
+                    language="pt" 
+                )
+                
+            text_content = transcription.text
+            
+            if not text_content:
+                logging.warning("Failed to transcribe audio content")
+                raise Exception("Failed to transcribe audio content")
+                
+            logging.info(f"Audio transcribed successfully")
+            return text_content
+                
+        except Exception as e:
+            logging.error(f"Whisper transcription error: {str(e)}")
+            raise Exception(f"Speech-to-text transcription failed: {str(e)}")
